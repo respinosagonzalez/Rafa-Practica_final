@@ -1,0 +1,17 @@
+- name: Actualiza paquetes
+  hosts: prod
+  yum:
+    name: '*'
+    state: latest
+
+- name: Instala el grupo Herramientas de desarrollo en en grupo test
+  hosts: test
+  yum:
+    name: "@Development tools"
+    state: present
+
+- name: Instala el grupo Herramientas de desarrollo en en grupo test
+  hosts: dev
+  yum:
+    name: "@Development tools"
+    state: present
