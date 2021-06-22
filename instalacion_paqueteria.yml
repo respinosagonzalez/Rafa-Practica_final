@@ -18,9 +18,16 @@
         state: present
     loop: "{{ paquetes }}"  
     when: "test" in group_names  
+    notify: restart_httpd
 
     - name: DEV
       yum:
         name: "@Development tools"
         state: present
     when: "dev" in group_names  
+
+  handlers:
+    - name: restart_httpd
+      service:
+        name: httpd
+        state: restart
