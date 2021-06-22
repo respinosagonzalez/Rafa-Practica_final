@@ -5,22 +5,22 @@
       - vim
       - make
       - net-tools
-  - tasks:
+  tasks:
     - name: PROD
-        yum:
-          name: '*'
-          state: latest
+      yum:
+        name: '*'
+        state: latest
     when: "prod" in group_names  
 
     - name: TEST
-        yum:
-          name: "{{ item }}"
-          state: present
+      yum:
+        name: "{{ item }}"
+        state: present
     loop: "{{ paquetes }}"  
     when: "test" in group_names  
 
     - name: DEV
-        yum:
-          name: "@Development tools"
-          state: present
+      yum:
+        name: "@Development tools"
+        state: present
     when: "dev" in group_names  
