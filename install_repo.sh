@@ -1,0 +1,1 @@
+ansible -i inventory -m yum_repository "name='https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm' enable-repo='EPEL-8' -download-only=true" test
