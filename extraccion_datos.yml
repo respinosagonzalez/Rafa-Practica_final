@@ -1,0 +1,12 @@
+- name: "Fichero de datos"
+      file:
+        path: /tmp/extraccion_datos.txt
+        state: touch
+
+- name: "Contenido"
+  blockinfile:
+    path: /tmp/extraccion_datos.txt
+    block: |
+              Nombre de host : {{ ansible_hostname }}
+              Memoria : {{ ansible_memtotal_mb }}
+              Espacio Disco sda : {{ ansible_devices.sda.size }}      

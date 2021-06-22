@@ -1,17 +1,26 @@
 - name: Actualiza paquetes
-  hosts: prod
-  yum:
-    name: '*'
-    state: latest
+  hosts: webservers
+  vars:
+    paquetes:
+      - vim
+      - make
+      - net-tools
+  - tasks:
+    - name: PROD
+        yum:
+          name: '*'
+          state: latest
+    when: "prod" in group_names  
 
-- name: Instala el grupo Herramientas de desarrollo en en grupo test
-  hosts: test
-  yum:
-    name: "@Development tools"
-    state: present
+    - name: TEST
+        yum:
+          name: "{{ item }}"
+          state: present
+    loop: "{{ paquetes }}"  
+    when: "test" in group_names  
 
-- name: Instala el grupo Herramientas de desarrollo en en grupo test
-  hosts: dev
-  yum:
-    name: "@Development tools"
-    state: present
+    - name: DEV
+        yum:
+          name: "@Development tools"
+          state: present
+    when: "dev" in group_names  
